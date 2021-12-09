@@ -1,0 +1,357 @@
+:root{
+  /*fuentes de google en variables*/
+  --fuentePrincipal: 'Montserrat', sans-serif;
+  --fuenteTexto: 'Raleway', sans-serif;
+
+  /*colores*/
+  --colorPrimario: #131620; 
+  --colorSecundario: #8774E1;
+  --colorTerciario: #0F121B;
+  --overlayColor: #8774E1E6;
+  --grisHover: #555;
+  --grisOscuro: #2F2E2E;
+  --grisMedio: #474545;
+  --grisClaro: #EBEBEB;
+  --grisEle: #f7f7f7;
+  --grisBor: #c6c6c6;
+  --blanco: #FFFFFF;
+  --blancoFondo: #F7F7F7;
+  --negro: #000000;
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --yellow2: #f1e300;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --borderColor: rgba(53,55,64,0.2);
+  --background1: #f3f3f3;
+  --background2: #f1f0ec;
+  --background3: #FFFFFF; 
+  --background4: #3b3b3b;
+  --background5: #333;
+  --background6: #1D1D1D;
+}
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* Now 10px = 1rem! */
+}
+body {
+  font-size: 16px; /* px fallback */
+  font-size: 1.6rem; /* default font-size for document */
+  line-height: 1.5; /* a nice line-height */
+  margin: 0;
+  background-color: var(--negro);
+}
+.body.home{
+      font-size: 16px; /* px fallback */
+      font-size: 1.6rem; /* default font-size for document */
+      line-height: 1.5; /* a nice line-height */
+      margin: 0;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+h1, h2, h3, h4{
+  font-family: var(--fuentePrincipal);
+  margin: 1rem 0;
+  line-height: 1.2;
+}
+h1{
+  font-size: 4rem;
+}
+@media (min-width: 1024px) {
+  h1{
+      font-size: 6rem;
+  }
+}
+h2{
+  font-size: 3.5rem;
+}
+@media (min-width: 1024px) {
+  h2{
+      font-size: 4.8rem;
+  }
+}
+h3{
+  font-size: 3.6rem;
+}
+h4{
+  font-size: 2.4rem;
+}
+p{
+  font-family: var(--fuenteTexto);
+  font-size: 1.6rem;
+}
+@media (min-width: 1024px) {
+  p{
+      font-size: 1.6rem;
+  }
+}
+/*ESTILOS GLOBALES */
+a{
+text-decoration: none;
+}
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+img{
+  max-width: 100%;
+  height: auto;
+}
+.contenedor{
+  max-width: 1200px;
+  width: 95%;
+  margin: 0 auto;
+}
+.contenedor-2{
+  max-width: 1600px;
+  width: 95%;
+  margin: 0 auto;
+}
+.contenedor-3{
+  max-width: 1900px;
+  width: 100%;
+  margin: 0 auto;
+}
+.contenedor-tablero{
+  max-width: 1200px;
+  width: 95%;
+  margin: 0 auto;
+}
+/** UTILIDADES**/
+.texto-blanco{
+  color: var(--blanco);
+}
+.texto-negro{
+  color: var(--negro);
+}
+.texto-primario{
+  color: var(--colorPrimario);
+}
+.texto-secundario{
+  color:var(--colorSecundario);
+}
+.text-center{
+  text-align: center;
+}
+.texto-primario{
+  color:var(--colorPrimario);
+}
+.texto-secundario{
+  color: var(--colorSecundario) !important;
+}
+.text-right{
+  text-align: right;
+}
+.bg-primario{
+  background-color: var(--colorPrimario);
+}
+.fw300{
+  font-weight: 300;
+}
+.fw600{
+  font-weight: 600;
+}
+.seccion{
+  padding-bottom: 5rem;
+}
+.pagina h1{
+  margin-bottom: 4rem;
+}
+.imagen-destacada{
+  margin-bottom: 3rem;
+  display: block;
+  margin: 0 auto;
+}
+section{
+  position: relative;
+  z-index: 5;
+  padding: 10rem 0 15rem 0;
+}
+section.final{
+  margin-bottom: 35rem;
+}
+.inicio{
+  background-color: var(--colorPrimario);
+  height: 100%;
+}
+.inicio .contenedor{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 70vh;
+}
+.menu-juego{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+ #tablero{
+  background: linear-gradient(to bottom, #7474bf, #348ac7);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+ }
+/*ZONA DEL JUGADOR*/
+ .zona-jugador p.texto-blanco{
+   border-bottom: 2px solid white;
+ }
+ #cartas-jugador{
+  display: flex;
+  flex-wrap: wrap;
+}
+ /*ZONA DE LA MÁQUINA*/
+ .zona-maquina p.texto-blanco{
+  border-top: 2px solid white;
+}
+#cartas-maquina{
+  display: flex;
+  flex-wrap: wrap;
+ }
+ /*ZONA CENTRO*/
+#zona-juego{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+/*ESTILOS PARA LAS CARTAS*/
+ .card{
+   background-color: green;
+   width: 10rem;
+   height: 15rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0 .5rem;
+   transition: .2s;
+   border-radius: 10px;
+ }
+ .card p{
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--blanco);
+  background-color: var(--colorPrimario);
+  padding: .3rem;
+}
+.rojas{
+  background-color: red;
+}
+.azul{
+  background-color: blue;
+}
+.amarillo{
+  background-color: yellow;
+}
+.verde{
+  background-color: green;
+}
+.especial{
+  background-color: black;
+}
+/*OCULTAR CARTAS MAQUINA*/
+
+ #cartas-maquina .card{
+  background-color: black;
+}
+#cartas-maquina .card p{
+  display: none;
+}
+#mazo-central:hover{
+  cursor:pointer;
+  border: 1px solid var(--blancoFondo);
+
+}
+#cartas-jugador img:hover{
+  cursor: pointer;
+  border: 1px solid var(--blancoFondo);
+}
+
+ #iniciar {background-image: linear-gradient(to right, #457fca 0%, #5691c8  51%, #457fca  100%)}
+ #iniciar {
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+ 
+    border-radius: 10px;
+
+  }
+
+  #iniciar:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #instrucciones {background-image: linear-gradient(to right, #457fca 0%, #5691c8  51%, #457fca  100%)}
+  #instrucciones {
+     margin: 10px;
+     padding: 15px 45px;
+     text-align: center;
+     text-transform: uppercase;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     border-radius: 10px;
+   }
+ 
+   #instrucciones:hover {
+     background-position: right center; /* change the direction of the change here */
+     color: #fff;
+     text-decoration: none;
+     cursor: pointer;
+   }
+
+   .btn-grad {background-image: linear-gradient(to right, #834d9b 0%, #d04ed6  51%, #834d9b  100%)}
+   .btn-grad {
+      margin: 10px;
+      padding: 15px 45px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;            
+      border-radius: 10px;
+      border: none;
+      display: block;
+    }
+
+    .btn-grad:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+   
+#zona-btn h1{
+  text-transform: uppercase;
+  margin-bottom: 5rem;
+}
+
+
+
+
+ .ndisplay{
+  display: none;
+}
+  

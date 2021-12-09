@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>UNO</title>
+  <meta name="description" content="HTML5, CSS3">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="shortcut icon" href="favicon.png" type="image/ico">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Raleway&display=swap" rel="stylesheet"> 
+ </head>
+<body>
+<section class="inicio">
+  <div class="contenedor-2">
+  </div>
+  <div class="contenedor-tablero" id="tablero">
+    <div  class="zona-maquina">
+      <div id="cartas-maquina">
+        
+      </div>
+      <p class="texto-blanco ndisplay">Jugador maquina</p>
+    </div>
+    <div id="zona-juego">
+      <div id="mazo-central">
+        <img class="ndisplay" src="./img/cartas/back.png" alt="carta-uno">
+      </div>
+      <div id="cartas-mesa"></div>
+    </div>
+    <div id="zona-btn">
+      <button class="ndisplay btn-grad "><p>Finalizar turno</p></button>
+      <h1 class="text-center texto-blanco">Juego del Uno V0.4</h1>
+      <div class="menu-juego">
+        <button id="instrucciones">
+            <p>Ver instrucciones</p>
+        </button>
+        <div class="ndisplay" id="zona-intrucciones">
+          <p class="texto-blanco"> El objetivo de UNO es deshacerse de todas las cartas que se “roban” inicialmente. Para tirar una carta en la mesa debe de ser del mismo color o número. El jugador que antes se quede sin cartas ganará la partida.</p>
+        </div>
+        <button id="iniciar">
+          <p>Iniciar</p>
+        </button>
+      </div>
+      
+    </div>
+    <div class="zona-jugador">
+      <p class="texto-blanco ndisplay">Jugador</p>
+      <div id="cartas-jugador">
+       
+      </div>
+    </div>
+  </div>
+
+</section>
+
+  <script src="js/Main.js"></script>
+</body>
+</html>
+<!-- https://www.clarin.com/cultura/como-se-juega-al-uno-instrucciones-reglas-oficiales-y-valores-de-las-cartas_0_mppOD8QCi.html -->
