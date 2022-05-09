@@ -46,6 +46,7 @@ let barajaJugador = [];
 let barajaMaquina = [];
 let barajaMesa = [];
 let color, numero, tipo;
+let id = 1;
 
 ////*EMPEZAR EL JUEGO*////
 let firstClick = true;
@@ -77,8 +78,10 @@ function crearCarta(color, tipo, numInicio, cantidad) {
             tipo: tipo,
             img: image,
             img2 : imgBack,
+            id: id
         }
         baraja.push(carta);
+        id++;
     }
 }
 /*CREAR BARAJA*/
@@ -116,7 +119,7 @@ function crearBaraja() {
     crearCarta('especial','+4', '1', '4');*/
 
     /*BARAJAR MAZO*/
-    total = baraja.length;
+    let total = baraja.length;
     for (let i = 0; i < total; i++) {
         let cartaAleatoria = Math.floor(Math.random() * (baraja.length));
         carta = baraja[cartaAleatoria];
@@ -133,6 +136,7 @@ function crearBaraja() {
     mostrarCartas(barajaJugador, cartasJugador);
     mostrarCartasMaquina(barajaMaquina, cartasMaquina);
     mostrarCartas(barajaMesa, zonaJuego);
+    console.log(barajaJugador);
 }
 
 //////SECCIÓN DEL JUGADOR 1*//////
@@ -282,6 +286,9 @@ function añadirCarta(baraja) {
 /*Muestra carta en el HTML*/
 function mostrarCarta(zona, carta) {
     img = carta.img;
+    let idCarta = carta.id;
+    console.log(idCarta);
+    img.setAttribute('data-item',idCarta);
     zona.appendChild(img);
 }
 /*MOSTRAR BARAJA EN EL HTML*/
