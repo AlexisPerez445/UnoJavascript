@@ -165,6 +165,15 @@ function eliminarCartaHTML(barajaHTML,id){
     });
 }
 
+function eliminarCartaMaquinaHTML(id){
+    const listaCarta = document.querySelectorAll('#cartas-maquina img');
+    listaCarta.forEach(carta => {
+        if(carta.getAttribute('data-item') == id){
+            carta.remove();
+        }
+    });
+}
+
 /*Eliminar carta*/
 function eliminarCarta(id) {
     const listaCarta = document.querySelectorAll('#cartas-jugador img');
@@ -233,7 +242,7 @@ function descartarCartaMaquina() {
             let cartaID = cartaMaquina.id;
             setCarta(barajaMesa, cartaMaquina);
             deleteCarta(barajaMaquina, cartaID);
-            eliminarCartaHTML(listaCarta, cartaID);
+            eliminarCartaMaquinaHTML(cartaID);
             eliminarCartaMesa();
             mostrarCarta(zonaJuego, cartaMaquina);
             setColorMesa();
