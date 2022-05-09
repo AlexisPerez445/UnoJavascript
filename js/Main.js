@@ -58,6 +58,7 @@ function empezarJuego() {
         gestionTurnos();
         eliminarElementos();
         addListenerCartas();
+        obtenerCoordenadas();
         sonidoAmbiente.play();
         sonidoClick.play();
         firstClick = false;
@@ -185,9 +186,10 @@ function eliminarCarta(id) {
     let comparacion = compararCartas(cartaMesa, cartaJugador);
     if (comparacion){
         setCarta(barajaMesa, cartaJugador);
-        eliminarCartaMesa();
-        mostrarCarta(zonaJuego, cartaJugador);
-        deleteCarta(barajaJugador, id)
+        //eliminarCartaMesa();
+        //mostrarCarta(zonaJuego, cartaJugador);
+        //deleteCarta(barajaJugador, id)
+        obtenerCoordenadas('.'+cartaJugador.img.getAttribute('class'));
         eliminarCartaHTML(listaCarta,id);
         setColorMesa();
         setTurno('0');
@@ -302,6 +304,7 @@ function añadirCarta(baraja) {
 function mostrarCarta(zona, carta) {
     img = carta.img;
     let idCarta = carta.id;
+    img.classList.add('carta'+idCarta);
     img.setAttribute('data-item',idCarta);
     zona.appendChild(img);
 }
@@ -315,6 +318,7 @@ function mostrarCartas(baraja, zona) {
 function mostrarCartaMaquina(zona, carta){
     img = carta.img2;
     let idCarta = carta.id;
+    img.classList.add('carta'+idCarta);
     img.setAttribute('data-item',idCarta);
     zona.appendChild(img);
 }
@@ -469,3 +473,26 @@ function ganar(){
 /*Mostrar por pantalla el turno actual + acciones jugador 2*/
 /* Mostrar FIN DEL JUEGO |GANADOR| PERDEDOR | */
 ////////////////////////////////////////////////////////////////////////*
+
+///////////////////// FUNCIONES V3 ANIMACIONES //////////////////////////
+
+window.addEventListener('scroll',obtenerCoordenadas);
+
+function obtenerCoordenadas(elemento){
+    const bodyRect = document.body.getBoundingClientRect();
+    const cartaEnMesa = document.querySelector('#cartas-mesa');
+    let posicion = cartaEnMesa.getBoundingClientRect();
+    let x = posicion.left - bodyRect.clientX;
+    let y = bodyRect.top - posicion.top;
+    console.log(y + " " + x);
+    animarCarta(elemento,x,y);
+}
+
+function animarCarta(elemento, x,y){
+    gsap.to(elemento,{
+        duration: 1,
+        x: 200,
+        y: y,
+        ease: 'bouce.out'
+    });
+}
