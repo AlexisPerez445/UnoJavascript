@@ -1,4 +1,4 @@
-//////* JUEGO DEL UNO V0.4 *//////
+//////* JUEGO DEL UNO V0.5 *//////
 
 /*AL CARGAR LA WEB*/
 window.addEventListener('DOMContentLoaded', webCargada);
@@ -137,7 +137,6 @@ function crearBaraja() {
     mostrarCartas(barajaJugador, cartasJugador);
     mostrarCartasMaquina(barajaMaquina, cartasMaquina);
     mostrarCartas(barajaMesa, zonaJuego);
-    console.log(barajaJugador);
 }
 
 //////SECCIÓN DEL JUGADOR 1*//////
@@ -158,9 +157,8 @@ function getIDcarta(e){
     
 }
 
-function eliminarCartaHTML(id){
-    const listaCarta = document.querySelectorAll('#cartas-jugador img');
-    listaCarta.forEach(carta => {
+function eliminarCartaHTML(barajaHTML,id){
+    barajaHTML.forEach(carta => {
         if(carta.getAttribute('data-item' == id )){
             carta.remove();
         }
@@ -168,21 +166,19 @@ function eliminarCartaHTML(id){
 }
 /*Eliminar carta*/
 function eliminarCarta(id) {
+    const listaCarta = document.querySelectorAll('#cartas-jugador img');
     /*carta del jugador*/
     let cartaJugador = getCarta(barajaJugador, id);
-    console.log(cartaJugador);
     /*carta que hay en la mesa*/
     let cartaMesa = getUltimaCarta(barajaMesa);
-    console.log(cartaMesa);
     /*Comparar si son del mismo color o numero y añadirla a la mesa*/
     let comparacion = compararCartas(cartaMesa, cartaJugador);
     if (comparacion){
         setCarta(barajaMesa, cartaJugador);
-        deleteCarta(barajaJugador, id)
         eliminarCartaMesa();
-        eliminarCartaHTML(id);
         mostrarCarta(zonaJuego, cartaJugador);
-        mostrarCartas(barajaJugador, cartasJugador);
+        deleteCarta(barajaJugador, id)
+        eliminarCartaHTML(listaCarta,id);
         setColorMesa();
         setTurno('0');
         sonidoCarta.play();
@@ -198,7 +194,7 @@ function sumarCarta() {
         añadirCarta(barajaJugador);
         carta = getUltimaCarta(barajaJugador);
         mostrarCarta(cartasJugador, carta);
-        descartarCartaJugador1();
+        addListenerCartas();
         sonidoRobar.play();
         secondClick = true;
     }
@@ -226,18 +222,18 @@ function addEventListeners() {
 function descartarCartaMaquina() {
     /*Lista de cartas del HTML*/
     const listaCarta = document.querySelectorAll('#cartas-maquina img');
-
     /*última carta de la mesa*/
     cartaMesa = getUltimaCarta(barajaMesa);
     /*comprobar cartas maquina*/
     for (let i = 0; i < listaCarta.length; i++) {
-        cartaMaquina = getCarta(barajaMaquina, i);
+        let cartaMaquina = getCarta(barajaMaquina, listaCarta[i].getAttribute('data-item'));
         comparacion = compararCartas(cartaMesa, cartaMaquina);
         if (comparacion) {
+            let cartaID = cartaMaquina.id;
+            console.log(cartaID);
             setCarta(barajaMesa, cartaMaquina);
-            deleteCarta(barajaMaquina, i);
-            eliminarCartasNodo(listaCarta);
-            mostrarCartasMaquina(barajaMaquina, cartasMaquina)
+            deleteCarta(barajaMaquina, cartaID);
+            mostrarCartasMaquina(barajaMaquina,cartasMaquina);
             eliminarCartaMesa();
             mostrarCarta(zonaJuego, cartaMaquina);
             setColorMesa();
@@ -251,6 +247,7 @@ function descartarCartaMaquina() {
             añadirCarta(barajaMaquina);
             cartaMaquina = getUltimaCarta(barajaMaquina);
             comparacion = compararCartas(cartaMesa, cartaMaquina);
+            cartaID = cartaMaquina.id;
             if (comparacion) {
                 setCarta(barajaMesa, cartaMaquina);
                 deleteLastCarta(barajaMaquina);
@@ -324,12 +321,6 @@ function eliminarCartaMesa() {
     cartasMesa.remove();
 }
 
-/*ELIMINA LA LISTA DE CARTAS DEL HTML*/
-function eliminarCartasNodo(listaCarta) {
-    listaCarta.forEach(card => {
-        card.remove();;
-    });
-}
 /*MUESTRA LAS INSTRUCCIONES DEL JUEGO*/
 function mostrarInstrucciones() {
     const zonaInstrucciones = document.querySelector('#zona-intrucciones');
@@ -378,10 +369,10 @@ function getUltimaCarta(baraja) {
     carta = baraja[ultimaCarta];
     return carta;
 }
-/*Elimina una carta en posicion*/
+/*Elimina una carta por IDs*/
 function deleteCarta(baraja, id) {
     let contador = 0;
-    bajara.forEach(carta => {
+    baraja.forEach(carta => {
         if( carta.id == id){
             baraja.splice(contador, 1);
         }
