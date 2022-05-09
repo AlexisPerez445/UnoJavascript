@@ -57,6 +57,7 @@ function empezarJuego() {
         setTurno('1');
         gestionTurnos();
         eliminarElementos();
+        addListenerCartas();
         sonidoAmbiente.play();
         sonidoClick.play();
         firstClick = false;
@@ -142,36 +143,44 @@ function crearBaraja() {
 //////SECCIÓN DEL JUGADOR 1*//////
 /*intentar mejorar*/
 /*Seleccionar carta y descartarla*/
-function descartarCartaJugador1() {
+
+function addListenerCartas(){
     const selecCarta = document.querySelectorAll('#cartas-jugador img');
-    let posicion = 0;
     selecCarta.forEach(img => {
-        img.addEventListener('click', obtenerPosicion);
+        img.addEventListener('click', getIDcarta);
     });
-    function obtenerPosicion(e) {
-        const nArray = Array.from(selecCarta);
-        posicion = nArray.indexOf(e.target);
-        if (posicion >= 0) {
-            eliminarCarta(posicion);
-        } else {
-            console.log("Error");
+}
+
+function getIDcarta(e){
+    e.preventDefault();
+    const idCarta = this.getAttribute('data-item');
+    eliminarCarta(idCarta);
+    
+}
+
+function eliminarCartaHTML(id){
+    const listaCarta = document.querySelectorAll('#cartas-jugador img');
+    listaCarta.forEach(carta => {
+        if(carta.getAttribute('data-item' == id )){
+            carta.remove();
         }
-    }
+    });
 }
 /*Eliminar carta*/
-function eliminarCarta(posicion) {
-    const listaCarta = document.querySelectorAll('#cartas-jugador img');
+function eliminarCarta(id) {
     /*carta del jugador*/
-    let cartaJugador = getCarta(barajaJugador, posicion);
+    let cartaJugador = getCarta(barajaJugador, id);
+    console.log(cartaJugador);
     /*carta que hay en la mesa*/
     let cartaMesa = getUltimaCarta(barajaMesa);
+    console.log(cartaMesa);
     /*Comparar si son del mismo color o numero y añadirla a la mesa*/
     let comparacion = compararCartas(cartaMesa, cartaJugador);
     if (comparacion){
         setCarta(barajaMesa, cartaJugador);
-        deleteCarta(barajaJugador, posicion)
+        deleteCarta(barajaJugador, id)
         eliminarCartaMesa();
-        eliminarCartasNodo(listaCarta);
+        eliminarCartaHTML(id);
         mostrarCarta(zonaJuego, cartaJugador);
         mostrarCartas(barajaJugador, cartasJugador);
         setColorMesa();
@@ -287,7 +296,6 @@ function añadirCarta(baraja) {
 function mostrarCarta(zona, carta) {
     img = carta.img;
     let idCarta = carta.id;
-    console.log(idCarta);
     img.setAttribute('data-item',idCarta);
     zona.appendChild(img);
 }
@@ -300,6 +308,8 @@ function mostrarCartas(baraja, zona) {
 /*Muestra carta maquina en el HTML*/
 function mostrarCartaMaquina(zona, carta){
     img = carta.img2;
+    let idCarta = carta.id;
+    img.setAttribute('data-item',idCarta);
     zona.appendChild(img);
 }
 /*MOSTRAR BARAJA MAQUINA EN EL HTML*/
@@ -348,9 +358,14 @@ function eliminarElementos() {
 //////////////////////////////////////////////////////////////////////
 ///*FUNCIONES V2*/// 
 /*Devuelve una carta*/
-function getCarta(baraja, posicion) {
-    carta = baraja[posicion];
-    return carta;
+function getCarta(baraja, id) {
+    let cartaE;
+    baraja.forEach(carta => {
+        if(carta.id == id){
+            cartaE = carta; 
+        }
+    });
+    return cartaE;
 }
 /*Devuelve el color de una carta*/
 function getColorCarta(carta){
@@ -364,8 +379,14 @@ function getUltimaCarta(baraja) {
     return carta;
 }
 /*Elimina una carta en posicion*/
-function deleteCarta(baraja, posicion) {
-    baraja.splice(posicion, 1);
+function deleteCarta(baraja, id) {
+    let contador = 0;
+    bajara.forEach(carta => {
+        if( carta.id == id){
+            baraja.splice(contador, 1);
+        }
+        contador++;
+    });
 }
 /*Elimina la última carta*/
 function deleteLastCarta(baraja) {
@@ -378,7 +399,7 @@ function setCarta(baraja, carta) {
 }
 /*Compara 2 cartas por color y numero*/
 function compararCartas(carta1, carta2) {
-    if (getColorMesa() == carta2.color || carta1.numero == carta2.numero) {
+    if (carta1.color == carta2.color || carta1.numero == carta2.numero) {
         return true;
     } else {
         return false;
@@ -393,10 +414,9 @@ function getTurno(){
     return turnoJugadores;
 }
 
-function turnoJugador1(){
+function turnoJugador1(e){
     console.log("Es el turno del jugador 1");
     finalizarClick = false;
-    descartarCartaJugador1();
     addEventListeners();
 }
 /*COMPROBACION DE TURNOS*/
