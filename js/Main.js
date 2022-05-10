@@ -184,11 +184,8 @@ function eliminarCarta(id) {
     /*Comparar si son del mismo color o numero y añadirla a la mesa*/
     let comparacion = compararCartas(cartaMesa, cartaJugador);
     if (comparacion){
-        console.log(cartaJugador);
-        setCarta(barajaMesa, cartaJugador);
-        //mostrarCarta(zonaJuego, cartaJugador);
-        //liminarCartaMesa();
         getCoords(cartaJugador.img);
+        setCarta(barajaMesa, cartaJugador);
         deleteCarta(barajaJugador, id)
         eliminarCartaHTML(id);
         setColorMesa();
@@ -429,7 +426,7 @@ function gestionTurnos() {
         turnoJugador1();
     } else if(getTurno() == '0') {
         console.log("Es el turno del jugador 2");
-        setTimeout(descartarCartaMaquina, 1500);
+        setTimeout(descartarCartaMaquina, 2000);
         secondClick = false;
     }
 }
@@ -506,4 +503,13 @@ function animarCarta(elemento, x,y){
         y: y,
         ease: 'bouce.out'
     });
+    setTimeout(j1Controls,1000);  
+}
+
+function j1Controls(){
+    let carta = getUltimaCarta(barajaMesa);
+    carta.style.removeProperty('transform');
+    eliminarCartaMesa();
+    mostrarCarta(zonaJuego, carta);
+    mostrarCartas(barajaJugador, cartasJugador);
 }
