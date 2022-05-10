@@ -58,7 +58,6 @@ function empezarJuego() {
         gestionTurnos();
         eliminarElementos();
         addListenerCartas();
-        obtenerCoordenadas();
         sonidoAmbiente.play();
         sonidoClick.play();
         firstClick = false;
@@ -187,6 +186,7 @@ function eliminarCarta(id) {
         getCoords(cartaJugador.img);
         setCarta(barajaMesa, cartaJugador);
         deleteCarta(barajaJugador, id)
+        setTimeout(j1Controls,1050);  
         setColorMesa();
         setTurno('0');
         sonidoCarta.play();
@@ -237,12 +237,12 @@ function descartarCartaMaquina() {
         let cartaMaquina = getCarta(barajaMaquina, listaCarta[i].getAttribute('data-item'));
         comparacion = compararCartas(cartaMesa, cartaMaquina);
         if (comparacion) {
+            getCoords(cartaMaquina.img2);
             let cartaID = cartaMaquina.id;
+            console.log(cartaMaquina);
             setCarta(barajaMesa, cartaMaquina);
             deleteCarta(barajaMaquina, cartaID);
-            eliminarCartaMaquinaHTML(cartaID);
-            eliminarCartaMesa();
-            mostrarCarta(zonaJuego, cartaMaquina);
+            setTimeout(j2Controls,1050);  
             setColorMesa();
             setTurno('1');
             sonidoCarta.play();
@@ -306,9 +306,7 @@ function mostrarCarta(zona, carta) {
 }
 /*MOSTRAR BARAJA EN EL HTML*/
 function mostrarCartas(baraja, zona) {
-    while(zona.firstChild){
-        zona.removeChild(zona.firstChild);
-    }
+    limpiarHTML(zona);
         baraja.forEach(carta => {
             mostrarCarta(zona, carta);
         })
@@ -323,6 +321,7 @@ function mostrarCartaMaquina(zona, carta){
 }
 /*MOSTRAR BARAJA MAQUINA EN EL HTML*/
 function mostrarCartasMaquina(baraja, zona) {
+    limpiarHTML(zona);
     baraja.forEach(carta => {
         mostrarCartaMaquina(zona, carta)
     })
@@ -430,7 +429,7 @@ function gestionTurnos() {
         turnoJugador1();
     } else if(getTurno() == '0') {
         console.log("Es el turno del jugador 2");
-        setTimeout(descartarCartaMaquina, 3000);
+        setTimeout(descartarCartaMaquina, 2000);
         secondClick = false;
     }
 }
@@ -439,6 +438,7 @@ function setColorMesa(){
     carta = getUltimaCarta(barajaMesa);
     colorMesa = carta.color;
 }
+
 /*Obtener color Mesa*/
 function getColorMesa(){
     return colorMesa;
@@ -466,6 +466,12 @@ function ganar(){
     }
 }
 
+function limpiarHTML(elemento){
+    while(elemento.firstChild){
+        elemento.removeChild(elemento.firstChild);
+    }
+}
+
 /*falta añadir funcion para seleccionar color de mesa (setColorMesa)*/
 /*Funcion para comparar color carta con color mesa*/
 /*añadir funcion de cartas comodin +2*/
@@ -476,18 +482,6 @@ function ganar(){
 ////////////////////////////////////////////////////////////////////////*
 
 ///////////////////// FUNCIONES V3 ANIMACIONES //////////////////////////
-
-window.addEventListener('scroll',obtenerCoordenadas);
-
-function obtenerCoordenadas(elemento){
-    const bodyRect = document.body.getBoundingClientRect();
-    const cartaEnMesa = document.querySelector('#cartas-mesa');
-    let posicion = cartaEnMesa.getBoundingClientRect();
-    let x = posicion.left - bodyRect.clientX;
-    let y = bodyRect.top - posicion.top;
- 
-    
-}
 
 function getCoords(elemento){
     const cartaEnMesa = document.querySelector('#cartas-mesa');
@@ -505,16 +499,22 @@ function animarCarta(elemento, x,y){
         duration: 1,
         x: x,
         y: y,
-        ease: 'bouce.out'
+        ease: 'expo.out'
     });
-    setTimeout(j1Controls,1000);  
 }
 
 function j1Controls(){
-    mostrarCartas(barajaJugador, cartasJugador);
     let carta = getUltimaCarta(barajaMesa);
-    carta.style.removeProperty('transform');
-    console.log(carta);
+    carta.img.style.removeProperty('transform');
     eliminarCartaMesa();
+    mostrarCartas(barajaJugador, cartasJugador);
+    mostrarCarta(zonaJuego, carta);
+}
+
+function j2Controls(){
+    let carta = getUltimaCarta(barajaMesa);
+    carta.img2.style.removeProperty('transform');
+    eliminarCartaMesa();
+    mostrarCartasMaquina(barajaMaquina, cartasMaquina);
     mostrarCarta(zonaJuego, carta);
 }
