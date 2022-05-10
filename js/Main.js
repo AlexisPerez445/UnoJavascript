@@ -154,6 +154,9 @@ function addListenerCartas(){
 function getIDcarta(e){
     e.preventDefault();
     const idCarta = this.getAttribute('data-item');
+    let parent = e.target;
+    console.log(parent);
+    getCoords(parent);
     eliminarCarta(idCarta);
 }
 
@@ -186,10 +189,9 @@ function eliminarCarta(id) {
     let comparacion = compararCartas(cartaMesa, cartaJugador);
     if (comparacion){
         setCarta(barajaMesa, cartaJugador);
-        //eliminarCartaMesa();
-        //mostrarCarta(zonaJuego, cartaJugador);
-        //deleteCarta(barajaJugador, id)
-        obtenerCoordenadas('.'+cartaJugador.img.getAttribute('class'));
+        mostrarCarta(zonaJuego, cartaJugador);
+        //liminarCartaMesa();
+        deleteCarta(barajaJugador, id)
         eliminarCartaHTML(listaCarta,id);
         setColorMesa();
         setTurno('0');
@@ -484,14 +486,25 @@ function obtenerCoordenadas(elemento){
     let posicion = cartaEnMesa.getBoundingClientRect();
     let x = posicion.left - bodyRect.clientX;
     let y = bodyRect.top - posicion.top;
-    console.log(y + " " + x);
+ 
+    
+}
+
+function getCoords(elemento){
+    const cartaEnMesa = document.querySelector('#cartas-mesa');
+    let posicion = cartaEnMesa.getBoundingClientRect();
+
+    let pos = elemento.getBoundingClientRect();
+    let x = posicion.left - pos.left;
+    let y = posicion.top - pos.top;
+    console.log(x + " " +y);
     animarCarta(elemento,x,y);
 }
 
 function animarCarta(elemento, x,y){
     gsap.to(elemento,{
         duration: 1,
-        x: 200,
+        x: x,
         y: y,
         ease: 'bouce.out'
     });

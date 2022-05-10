@@ -215,6 +215,10 @@ section.final{
   display: flex;
   flex-wrap: wrap;
 }
+
+#cartas-jugador img{
+  position: relative;
+}
  /*ZONA DE LA MÁQUINA*/
  .zona-maquina p.texto-blanco{
   border-top: 2px solid white;
