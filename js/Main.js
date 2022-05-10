@@ -154,16 +154,13 @@ function addListenerCartas(){
 function getIDcarta(e){
     e.preventDefault();
     const idCarta = this.getAttribute('data-item');
-    let parent = e.target;
-    console.log(parent);
-    getCoords(parent);
     eliminarCarta(idCarta);
 }
 
-function eliminarCartaHTML(barajaHTML,id){
+function eliminarCartaHTML(id){
+    const barajaHTML = document.querySelectorAll('#cartas-jugador img');
     barajaHTML.forEach(carta => {
         if(carta.getAttribute('data-item' == id )){
-            console.log(carta);
             carta.remove();
         }
     });
@@ -180,7 +177,6 @@ function eliminarCartaMaquinaHTML(id){
 
 /*Eliminar carta*/
 function eliminarCarta(id) {
-    const listaCarta = document.querySelectorAll('#cartas-jugador img');
     /*carta del jugador*/
     let cartaJugador = getCarta(barajaJugador, id);
     /*carta que hay en la mesa*/
@@ -188,11 +184,13 @@ function eliminarCarta(id) {
     /*Comparar si son del mismo color o numero y añadirla a la mesa*/
     let comparacion = compararCartas(cartaMesa, cartaJugador);
     if (comparacion){
+        console.log(cartaJugador);
         setCarta(barajaMesa, cartaJugador);
-        mostrarCarta(zonaJuego, cartaJugador);
+        //mostrarCarta(zonaJuego, cartaJugador);
         //liminarCartaMesa();
+        getCoords(cartaJugador.img);
         deleteCarta(barajaJugador, id)
-        eliminarCartaHTML(listaCarta,id);
+        eliminarCartaHTML(id);
         setColorMesa();
         setTurno('0');
         sonidoCarta.play();
