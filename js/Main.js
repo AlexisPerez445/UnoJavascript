@@ -187,7 +187,6 @@ function eliminarCarta(id) {
         getCoords(cartaJugador.img);
         setCarta(barajaMesa, cartaJugador);
         deleteCarta(barajaJugador, id)
-        eliminarCartaHTML(id);
         setColorMesa();
         setTurno('0');
         sonidoCarta.play();
@@ -307,6 +306,9 @@ function mostrarCarta(zona, carta) {
 }
 /*MOSTRAR BARAJA EN EL HTML*/
 function mostrarCartas(baraja, zona) {
+    while(zona.firstChild){
+        zona.removeChild(zona.firstChild);
+    }
         baraja.forEach(carta => {
             mostrarCarta(zona, carta);
         })
@@ -327,8 +329,10 @@ function mostrarCartasMaquina(baraja, zona) {
 }
 /*ELIMINA LA CARTA DE LA MESA*/
 function eliminarCartaMesa() {
-    const cartasMesa = document.querySelector('#cartas-mesa img');
-    cartasMesa.remove();
+    const cartasMesa = document.querySelector('#cartas-mesa');
+    while(cartasMesa.firstChild){
+        cartasMesa.removeChild(cartasMesa.firstChild);
+    }
 }
 
 /*MUESTRA LAS INSTRUCCIONES DEL JUEGO*/
@@ -426,7 +430,7 @@ function gestionTurnos() {
         turnoJugador1();
     } else if(getTurno() == '0') {
         console.log("Es el turno del jugador 2");
-        setTimeout(descartarCartaMaquina, 2000);
+        setTimeout(descartarCartaMaquina, 3000);
         secondClick = false;
     }
 }
@@ -507,9 +511,10 @@ function animarCarta(elemento, x,y){
 }
 
 function j1Controls(){
+    mostrarCartas(barajaJugador, cartasJugador);
     let carta = getUltimaCarta(barajaMesa);
     carta.style.removeProperty('transform');
+    console.log(carta);
     eliminarCartaMesa();
     mostrarCarta(zonaJuego, carta);
-    mostrarCartas(barajaJugador, cartasJugador);
 }
