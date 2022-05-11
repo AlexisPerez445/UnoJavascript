@@ -151,6 +151,9 @@ img{
 .texto-secundario{
   color: var(--colorSecundario) !important;
 }
+.zi2{
+  z-index: 2;
+}
 .text-right{
   text-align: right;
 }

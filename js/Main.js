@@ -315,7 +315,7 @@ function mostrarCartas(baraja, zona) {
 function mostrarCartaMaquina(zona, carta){
     img = carta.img2;
     let idCarta = carta.id;
-    img.classList.add('carta'+idCarta);
+    img.classList.add('carta'+idCarta, 'zi2');
     img.setAttribute('data-item',idCarta);
     zona.appendChild(img);
 }
@@ -479,6 +479,8 @@ function limpiarHTML(elemento){
 /*añadir funcion de cartas comodin cambiar de color*/
 /*Mostrar por pantalla el turno actual + acciones jugador 2*/
 /* Mostrar FIN DEL JUEGO |GANADOR| PERDEDOR | */
+/*MOSTRAR BOTON DE QUITAR AUDIO*/
+/*ARREGLAR ANIMACIÓN DE LAS CARTAS MÁQUINA*/
 ////////////////////////////////////////////////////////////////////////*
 
 ///////////////////// FUNCIONES V3 ANIMACIONES //////////////////////////
