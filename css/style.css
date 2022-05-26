@@ -202,7 +202,11 @@ section.final{
   align-items: center;
 }
  #tablero{
-  background: linear-gradient(to bottom, #7474bf, #348ac7);
+  /*background: linear-gradient(to bottom, #7474bf, #348ac7);*/
+  background-image: url('../img/bg3.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   height: auto;
   display: flex;
   flex-direction: column;
