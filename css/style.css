@@ -1,6 +1,15 @@
+@font-face {
+  font-family: 'KdamThmorPro';
+  src: url('../fonts/KdamThmorPro-Regular.ttf');
+}
+@font-face {
+  font-family: 'PressStart2P';
+  src: url('../fonts/PressStart2P-Regular.ttf');
+}
 :root{
   /*fuentes de google en variables*/
   --fuentePrincipal: 'Montserrat', sans-serif;
+  --fuenteSecundaria: 'KdamThmorPro', sans-serif;
   --fuenteTexto: 'Raleway', sans-serif;
 
   /*colores*/
@@ -39,10 +48,6 @@
   --background4: #3b3b3b;
   --background5: #333;
   --background6: #1D1D1D;
-}
-@font-face {
-  font-family: 'KdamThmorPro';
-  src: url('../fonts/ ');
 }
 html {
   box-sizing: border-box;
@@ -134,6 +139,9 @@ img{
   margin: 0 auto;
 }
 /** UTILIDADES**/
+.fuenteSecundaria{
+  font-family: var(--fuenteSecundaria) !important;
+}
 .texto-blanco{
   color: var(--blanco);
 }
@@ -243,8 +251,6 @@ section.final{
   display: flex;
   flex-wrap: wrap;
 }
-
-
 /*ESTILOS PARA LAS CARTAS*/
  .card{
    background-color: green;
@@ -296,7 +302,6 @@ section.final{
   cursor: pointer;
   border: 1px solid var(--blancoFondo);
 }
-
  #iniciar {background-image: linear-gradient(to right, #457fca 0%, #5691c8  51%, #457fca  100%)}
  #iniciar {
     margin: 10px;
@@ -310,14 +315,12 @@ section.final{
     border-radius: 10px;
 
   }
-
   #iniciar:hover {
     background-position: right center; /* change the direction of the change here */
     color: #fff;
     text-decoration: none;
     cursor: pointer;
   }
-
   #instrucciones {background-image: linear-gradient(to right, #457fca 0%, #5691c8  51%, #457fca  100%)}
   #instrucciones {
      margin: 10px;
@@ -336,7 +339,6 @@ section.final{
      text-decoration: none;
      cursor: pointer;
    }
-
    .btn-grad {background-image: linear-gradient(to right, #834d9b 0%, #d04ed6  51%, #834d9b  100%)}
    .btn-grad {
       margin: 10px;
@@ -357,15 +359,16 @@ section.final{
       text-decoration: none;
       cursor: pointer;
     }
-   
 #zona-btn h1{
   text-transform: uppercase;
   margin-bottom: 5rem;
 }
- .ndisplay{
+.ndisplay{
   display: none;
 }
-  
 #cartas-mesa{
   position: relative;
+}
+.frameStyle{
+  width: 100%;
 }

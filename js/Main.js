@@ -451,7 +451,10 @@ function ganar(){
         div.classList.add('ganar');
         div.classList.add('text-center');
         div.innerHTML = `
-        <h1 class="texto-blanco">¡Has ganado!</h1>`;
+        <h1 class="fuenteSecundaria text-center texto-blanco">Has ganado</h1>
+        <div class=" text-center">
+            <img src="./img/win_1.gif" class="frameStyle" id="frameGanar">
+        </div>`;
         contenedor.appendChild(div);
         console.log("Gana el jugador 1");
     } else if(barajaMaquina.length == 0){
@@ -460,7 +463,10 @@ function ganar(){
         div.classList.add('ganar');
         div.classList.add('text-center');
         div.innerHTML = `
-        <h1 class="texto-blanco">Has perdido ;(...</h1>`;
+        <h1 class="fuenteSecundaria text-center texto-blanco">Has Perdido</h1>
+        <div class="contenedor-2 text-center">
+            <img src="./img/perder_2.gif" class="frameStyle" id="frameGanar">
+        </div>`;
         contenedor.appendChild(div);
         console.log("Gana el jugador 2");
     }
