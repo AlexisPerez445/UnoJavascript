@@ -23,6 +23,8 @@ const pMaquina = document.querySelector('.zona-maquina p');
 const cartaMazo = document.querySelector('#mazo-central img');
 const tablero = document.querySelector('#tablero');
 const contenedor =document.querySelector('.contenedor-2');
+const btnSubir = document.querySelector('#btn-subir');
+const btnBajar = document.querySelector('#btn-bajar');
 
 /////*CONTROLADOR DE LOS TURNOS*/////
 let turnoJugadores =0;
@@ -61,6 +63,8 @@ function empezarJuego() {
         sonidoAmbiente.play();
         sonidoClick.play();
         firstClick = false;
+        btnSubir.addEventListener('click', volumenControl);
+        btnBajar.addEventListener('click', volumenControl);
     }
 }
 
@@ -525,4 +529,18 @@ function j2Controls(){
     eliminarCartaMesa();
     mostrarCartasMaquina(barajaMaquina, cartasMaquina);
     mostrarCarta(zonaJuego, carta);
+}
+
+function volumenControl(){
+    console.log(btnSubir)
+    if(btnSubir.classList.contains('ndisplay')){
+        btnBajar.classList.add('ndisplay');
+        btnSubir.classList.remove('ndisplay');
+        sonidoAmbiente.play();
+        console.log(btnSubir);
+    } else {
+        btnBajar.classList.remove('ndisplay');
+        btnSubir.classList.add('ndisplay');
+        sonidoAmbiente.stop();
+    }
 }

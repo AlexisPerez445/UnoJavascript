@@ -215,7 +215,7 @@ section.final{
 }
  #tablero{
   /*background: linear-gradient(to bottom, #7474bf, #348ac7);*/
-  background-image: url('../img/bg3.jpg');
+  background-image: url('../img/bg_game.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -305,7 +305,7 @@ section.final{
  #iniciar {background-image: linear-gradient(to right, #457fca 0%, #5691c8  51%, #457fca  100%)}
  #iniciar {
     margin: 10px;
-    padding: 15px 45px;
+    padding: .5rem 1.2rem;
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
@@ -324,7 +324,7 @@ section.final{
   #instrucciones {background-image: linear-gradient(to right, #457fca 0%, #5691c8  51%, #457fca  100%)}
   #instrucciones {
      margin: 10px;
-     padding: 15px 45px;
+     padding: .5rem 1.2rem;
      text-align: center;
      text-transform: uppercase;
      transition: 0.5s;
@@ -342,13 +342,13 @@ section.final{
    .btn-grad {background-image: linear-gradient(to right, #834d9b 0%, #d04ed6  51%, #834d9b  100%)}
    .btn-grad {
       margin: 10px;
-      padding: 15px 45px;
+      padding: .5rem 1.2rem;
       text-align: center;
       text-transform: uppercase;
       transition: 0.5s;
       background-size: 200% auto;
       color: white;            
-      border-radius: 10px;
+      border-radius: 3rem;
       border: none;
       display: block;
     }
@@ -371,4 +371,11 @@ section.final{
 }
 .frameStyle{
   width: 100%;
+}
+#tablero #btn-vol{
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
 }
