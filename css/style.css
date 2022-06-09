@@ -215,6 +215,7 @@ section.final{
 }
  #tablero{
   /*background: linear-gradient(to bottom, #7474bf, #348ac7);*/
+  position: relative;
   background-image: url('../img/bg_game.jpg');
   background-position: center;
   background-size: cover;
@@ -227,6 +228,9 @@ section.final{
   padding: 2rem;
  }
 /*ZONA DEL JUGADOR*/
+.zona-jugador{
+  margin-bottom: 6rem;
+}
  .zona-jugador p.texto-blanco{
    border-bottom: 2px solid white;
  }
@@ -234,11 +238,13 @@ section.final{
   display: flex;
   flex-wrap: wrap;
 }
-
 #cartas-jugador img{
   position: relative;
 }
  /*ZONA DE LA MÁQUINA*/
+ .zona-maquina{
+   margin-top: 7rem;
+ }
  .zona-maquina p.texto-blanco{
   border-top: 2px solid white;
 }
@@ -286,7 +292,6 @@ section.final{
   background-color: black;
 }
 /*OCULTAR CARTAS MAQUINA*/
-
  #cartas-maquina .card{
   background-color: black;
 }
@@ -296,7 +301,6 @@ section.final{
 #mazo-central:hover{
   cursor:pointer;
   border: 1px solid var(--blancoFondo);
-
 }
 #cartas-jugador img:hover{
   cursor: pointer;
@@ -311,9 +315,7 @@ section.final{
     transition: 0.5s;
     background-size: 200% auto;
     color: white;            
- 
     border-radius: 10px;
-
   }
   #iniciar:hover {
     background-position: right center; /* change the direction of the change here */
@@ -332,12 +334,14 @@ section.final{
      color: white;            
      border-radius: 10px;
    }
- 
    #instrucciones:hover {
      background-position: right center; /* change the direction of the change here */
      color: #fff;
      text-decoration: none;
      cursor: pointer;
+   }
+   #iniciar p svg{
+     margin-left: .7rem;
    }
    .btn-grad {background-image: linear-gradient(to right, #834d9b 0%, #d04ed6  51%, #834d9b  100%)}
    .btn-grad {
@@ -352,7 +356,6 @@ section.final{
       border: none;
       display: block;
     }
-
     .btn-grad:hover {
       background-position: right center; /* change the direction of the change here */
       color: #fff;
@@ -374,8 +377,22 @@ section.final{
 }
 #tablero #btn-vol{
   color: white;
-  position: absolute;
-  top: 0;
-  left: 0;
   cursor: pointer;
+}
+#btn-vol .icon-basic{
+  width: 4%;
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+}
+#btn-vol .back-icon{
+  width: 7%;
+  position: absolute;
+  top: 3.3rem;
+  left: 3rem;
+}
+.opacityPulse-css {
+  animation: opacityPulse 2s ease-out;
+  animation-iteration-count: infinite; 
+  opacity: 1;
 }

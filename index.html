@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/all.min.css">
   <link rel="stylesheet" href="./css/fontawesome.min.css">
+  <link rel="stylesheet" href="./css/infinite.css">
   <link rel="shortcut icon" href="favicon.png" type="image/ico">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Raleway&display=swap" rel="stylesheet">
  </head>
@@ -17,16 +18,17 @@
   </div>
   <div class="contenedor-tablero" id="tablero">
   <div id="btn-vol">
-    <i class="fa-solid fa-volume-high" id="btn-subir"></i>
-    <i class="fa-solid fa-volume-xmark ndisplay" id="btn-bajar"></i>
+    <img id="back-arrow" class="back-icon ndisplay" src="./img/icons/back_arrow.png" alt="volumen_up">
+    <img id="btn-subir" class="icon-basic ndisplay" src="./img/icons/vol_up.png" alt="volumen_up">
+    <img id="btn-bajar" class="icon-basic ndisplay" src="./img/icons/vol_down.png" alt="volumen_down">
   </div>
     
     <div  class="zona-maquina">
       <div id="cartas-maquina">
         
-        
+
       </div>
-      <p class="texto-blanco ndisplay">Jugador maquina</p>
+      <p class="texto-blanco ndisplay maquina-txt">Jugador maquina</p>
     </div>
     <div id="zona-juego">
       <div id="mazo-central">
@@ -47,13 +49,13 @@
           <p class="texto-blanco"> El objetivo de UNO es deshacerse de todas las cartas que se “roban” inicialmente. Para tirar una carta en la mesa debe de ser del mismo color o número. El jugador que antes se quede sin cartas ganará la partida.</p>
         </div>
         <button id="iniciar">
-          <p>Iniciar <i class="fa-solid fa-play"></i></p>
+          <p>Iniciar<i class="fa-solid fa-play"></i></p>
         </button>
       </div>
       
     </div>
     <div class="zona-jugador">
-      <p class="texto-blanco ndisplay">Jugador</p>
+      <p class="texto-blanco ndisplay jugador-txt">Jugador</p>
       <div id="cartas-jugador">
        
       </div>

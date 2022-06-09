@@ -25,6 +25,9 @@ const tablero = document.querySelector('#tablero');
 const contenedor =document.querySelector('.contenedor-2');
 const btnSubir = document.querySelector('#btn-subir');
 const btnBajar = document.querySelector('#btn-bajar');
+const backArrow = document.querySelector('#back-arrow');
+const jugadorTXT = document.querySelector('.jugador-txt');
+const maquinaTXT = document.querySelector('.maquina-txt');
 
 /////*CONTROLADOR DE LOS TURNOS*/////
 let turnoJugadores =0;
@@ -64,7 +67,10 @@ function empezarJuego() {
         sonidoClick.play();
         firstClick = false;
         btnSubir.addEventListener('click', volumenControl);
+        btnSubir.classList.remove('ndisplay');
+        backArrow.classList.remove('ndisplay');
         btnBajar.addEventListener('click', volumenControl);
+        backArrow.addEventListener('click', restartGame);
     }
 }
 
@@ -425,6 +431,10 @@ function getTurno(){
 function turnoJugador1(e){
     console.log("Es el turno del jugador 1");
     finalizarClick = false;
+    jugadorTXT.classList.add('opacityPulse-css');
+    if( maquinaTXT.classList.contains('opacityPulse-css')){
+        maquinaTXT.classList.remove('opacityPulse-css');
+    }
     addEventListeners();
 }
 /*COMPROBACION DE TURNOS*/
@@ -432,6 +442,8 @@ function gestionTurnos() {
     if (getTurno() == '1') {
         turnoJugador1();
     } else if(getTurno() == '0') {
+        jugadorTXT.classList.remove('opacityPulse-css');
+        maquinaTXT.classList.add('opacityPulse-css');
         console.log("Es el turno del jugador 2");
         setTimeout(descartarCartaMaquina, 2000);
         secondClick = false;
@@ -476,25 +488,23 @@ function ganar(){
     }
 }
 
-function limpiarHTML(elemento){
-    while(elemento.firstChild){
-        elemento.removeChild(elemento.firstChild);
-    }
-}
-
 /*falta añadir funcion para seleccionar color de mesa (setColorMesa)*/
 /*Funcion para comparar color carta con color mesa*/
 /*añadir funcion de cartas comodin +2*/
 /*añadir funcion de cartas comodin +4 y seleccionar color mesa*/
 /*añadir funcion de cartas comodin cambiar de color*/
 /*Mostrar por pantalla el turno actual + acciones jugador 2*/
-/* Mostrar FIN DEL JUEGO |GANADOR| PERDEDOR | */
-/*MOSTRAR BOTON DE QUITAR AUDIO*/
-/*ARREGLAR ANIMACIÓN DE LAS CARTAS MÁQUINA*/
+/*ARREGLAR ANIMACIÓN DE LAS CARTAS MÁQUINA AL ROBAR CARTA*/
 ////////////////////////////////////////////////////////////////////////*
 
 ///////////////////// FUNCIONES V3 ANIMACIONES //////////////////////////
+function limpiarHTML(elemento){
+    while(elemento.firstChild){
+        elemento.removeChild(elemento.firstChild);
+    }
+}
 
+// OBTENER COORDENADAS DE LA CARTA QUE HAY EN LA MESA
 function getCoords(elemento){
     const cartaEnMesa = document.querySelector('#cartas-mesa');
     let posicion = cartaEnMesa.getBoundingClientRect();
@@ -502,10 +512,10 @@ function getCoords(elemento){
     let pos = elemento.getBoundingClientRect();
     let x = posicion.left - pos.left;
     let y = posicion.top - pos.top;
-    console.log(x + " " +y);
     animarCarta(elemento,x,y);
 }
 
+// MUEVE LA CARTA A UNA POSICION ELEGIDA
 function animarCarta(elemento, x,y){
     gsap.to(elemento,{
         duration: 1,
@@ -531,16 +541,20 @@ function j2Controls(){
     mostrarCarta(zonaJuego, carta);
 }
 
+// ACTIVAR/DESACTIVAR MUSICA DE FONDO
 function volumenControl(){
-    console.log(btnSubir)
     if(btnSubir.classList.contains('ndisplay')){
         btnBajar.classList.add('ndisplay');
         btnSubir.classList.remove('ndisplay');
         sonidoAmbiente.play();
-        console.log(btnSubir);
     } else {
         btnBajar.classList.remove('ndisplay');
         btnSubir.classList.add('ndisplay');
-        sonidoAmbiente.stop();
+        sonidoAmbiente.pause();
     }
+}
+
+// REINICIAR EL JUEGO
+function restartGame(){
+    console.log("hola");
 }
