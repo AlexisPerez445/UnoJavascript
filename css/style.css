@@ -241,6 +241,11 @@ section.final{
 #cartas-jugador img{
   position: relative;
 }
+/*
+#cartas-jugador img:hover{
+  transform: scale(1.1);
+  transition: .3s;
+}*/
  /*ZONA DE LA MÁQUINA*/
  .zona-maquina{
    margin-top: 7rem;
