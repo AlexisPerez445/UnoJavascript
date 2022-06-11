@@ -28,6 +28,8 @@ const btnBajar = document.querySelector('#btn-bajar');
 const backArrow = document.querySelector('#back-arrow');
 const jugadorTXT = document.querySelector('.jugador-txt');
 const maquinaTXT = document.querySelector('.maquina-txt');
+const cardFront = document.querySelector('.cardFront');
+const cardBack = document.querySelector('.cardBack');
 
 /////*CONTROLADOR DE LOS TURNOS*/////
 let turnoJugadores =0;
@@ -147,6 +149,8 @@ function crearBaraja() {
     mostrarCartas(barajaJugador, cartasJugador);
     mostrarCartasMaquina(barajaMaquina, cartasMaquina);
     mostrarCartas(barajaMesa, zonaJuego);
+    mostrarCarta(cardFront,getUltimaCarta(barajaMazo));
+    mostrarCartaMaquina(cardBack,getUltimaCarta(barajaMazo))
 }
 
 //////SECCIÓN DEL JUGADOR 1*//////
@@ -211,7 +215,10 @@ function sumarCarta() {
     if (secondClick == false) {
         añadirCarta(barajaJugador);
         carta = getUltimaCarta(barajaJugador);
-        mostrarCarta(cartasJugador, carta);
+        const cartasJ1 = document.querySelectorAll('#cartas-jugador img');
+        const lastElement = cartasJ1[cartasJ1.length-1];
+        getCardCoords(lastElement);
+        setTimeout(mostrarCarta(cartasJugador, carta),5000);
         addListenerCartas();
         sonidoRobar.play();
         secondClick = true;
@@ -231,7 +238,7 @@ function finalizarTurno() {
 
 /*EVENTOS QUE SE ACTIVAN CUANDO ES EL TURNO DEL JUGADOR 1*/
 function addEventListeners() {
-    mazoCentral.addEventListener('click', sumarCarta);
+    //mazoCentral.addEventListener('click', sumarCarta);
     btnFinalizar.addEventListener('click', finalizarTurno);
 }
 
@@ -366,7 +373,6 @@ function eliminarElementos() {
     tituloJuego.remove();
     pJugador.classList.remove('ndisplay');
     pMaquina.classList.remove('ndisplay');
-    cartaMazo.classList.remove('ndisplay');
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -487,6 +493,11 @@ function ganar(){
         console.log("Gana el jugador 2");
     }
 }
+function limpiarHTML(elemento){
+    while(elemento.firstChild){
+        elemento.removeChild(elemento.firstChild);
+    }
+}
 
 /*falta añadir funcion para seleccionar color de mesa (setColorMesa)*/
 /*Funcion para comparar color carta con color mesa*/
@@ -498,11 +509,7 @@ function ganar(){
 ////////////////////////////////////////////////////////////////////////*
 
 ///////////////////// FUNCIONES V3 ANIMACIONES //////////////////////////
-function limpiarHTML(elemento){
-    while(elemento.firstChild){
-        elemento.removeChild(elemento.firstChild);
-    }
-}
+
 
 // OBTENER COORDENADAS DE LA CARTA QUE HAY EN LA MESA
 function getCoords(elemento){
@@ -525,6 +532,15 @@ function animarCarta(elemento, x,y){
     });
 }
 
+function getCardCoords(elemento){
+    const cartaMazo = document.querySelector('#mazo-central img');
+    let posicion = cartaMazo.getBoundingClientRect();
+    let pos = elemento.getBoundingClientRect();
+    let x = (pos.left - posicion.left) + 107;
+    let y = (pos.top - posicion.top);
+    animarCarta(cartaMazo,x,y);
+}
+
 function j1Controls(){
     let carta = getUltimaCarta(barajaMesa);
     carta.img.style.removeProperty('transform');
@@ -540,6 +556,8 @@ function j2Controls(){
     mostrarCartasMaquina(barajaMaquina, cartasMaquina);
     mostrarCarta(zonaJuego, carta);
 }
+
+//////////////////////////////////////////////////////////
 
 // ACTIVAR/DESACTIVAR MUSICA DE FONDO
 function volumenControl(){

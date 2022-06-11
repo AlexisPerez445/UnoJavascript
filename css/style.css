@@ -262,47 +262,6 @@ section.final{
   display: flex;
   flex-wrap: wrap;
 }
-/*ESTILOS PARA LAS CARTAS*/
- .card{
-   background-color: green;
-   width: 10rem;
-   height: 15rem;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   margin: 0 .5rem;
-   transition: .2s;
-   border-radius: 10px;
- }
- .card p{
-  font-size: 1.5rem;
-  text-align: center;
-  color: var(--blanco);
-  background-color: var(--colorPrimario);
-  padding: .3rem;
-}
-.rojas{
-  background-color: red;
-}
-.azul{
-  background-color: blue;
-}
-.amarillo{
-  background-color: yellow;
-}
-.verde{
-  background-color: green;
-}
-.especial{
-  background-color: black;
-}
-/*OCULTAR CARTAS MAQUINA*/
- #cartas-maquina .card{
-  background-color: black;
-}
-#cartas-maquina .card p{
-  display: none;
-}
 #mazo-central:hover{
   cursor:pointer;
   border: 1px solid var(--blancoFondo);
@@ -400,4 +359,27 @@ section.final{
   animation: opacityPulse 2s ease-out;
   animation-iteration-count: infinite; 
   opacity: 1;
+}
+
+/*ESTILOS PARA LAS CARTAS MAZO*/
+.card{
+  perspective: 1000px;
+}
+.cardContainer{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    transition: all 1s ease;
+    transform-style: preserve-3d;
+}
+.cardFront{
+  grid-area: 1/1;
+  transform: rotateY(180deg);
+}
+.cardBack{
+  grid-area: 1/1;
+}
+
+.card:hover .cardContainer{
+  transform: rotateY(180deg);
 }
