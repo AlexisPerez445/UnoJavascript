@@ -149,8 +149,8 @@ function crearBaraja() {
     mostrarCartas(barajaJugador, cartasJugador);
     mostrarCartasMaquina(barajaMaquina, cartasMaquina);
     mostrarCartas(barajaMesa, zonaJuego);
-    mostrarCarta(cardFront,getUltimaCarta(barajaMazo));
-    mostrarCartaMaquina(cardBack,getUltimaCarta(barajaMazo))
+    mostrarCartaMaquina(cardFront,getUltimaCarta(barajaMazo));
+    mostrarCarta(cardBack,getUltimaCarta(barajaMazo))
 }
 
 //////SECCIÓN DEL JUGADOR 1*//////

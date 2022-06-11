@@ -363,8 +363,11 @@ section.final{
 
 /*ESTILOS PARA LAS CARTAS MAZO*/
 .card{
-  perspective: 1000px;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
 }
+/*
 .cardContainer{
     display: grid;
     grid-template-columns: 1fr;
@@ -382,4 +385,28 @@ section.final{
 
 .card:hover .cardContainer{
   transform: rotateY(180deg);
+}*/
+
+.card .face {
+  grid-area: 1/1;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  transition: .5s;
+}
+.card .front {
+  transform: perspective(600px) rotateY(0deg);
+}
+
+.card .back {
+  transform: perspective(600px) rotateY(180deg);
+}
+
+.card:hover .front {
+  transform: perspective(600px) rotateY(180deg);
+}
+
+.card:hover .back {
+  transform: perspective(600px) rotateY(360deg);
 }
