@@ -367,26 +367,6 @@ section.final{
   grid-template-columns: 1fr;
   justify-content: center;
 }
-/*
-.cardContainer{
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
-    transition: all 1s ease;
-    transform-style: preserve-3d;
-}
-.cardFront{
-  grid-area: 1/1;
-  transform: rotateY(180deg);
-}
-.cardBack{
-  grid-area: 1/1;
-}
-
-.card:hover .cardContainer{
-  transform: rotateY(180deg);
-}*/
-
 .card .face {
   grid-area: 1/1;
   width: 100%;

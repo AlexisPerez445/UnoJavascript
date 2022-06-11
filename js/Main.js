@@ -546,6 +546,10 @@ function getCardCoords(elemento){
     animarCarta(cartaMazo,x,y);
 }
 
+function girarCarta(){
+    let carta ="";
+}
+
 function j1Controls(){
     let carta = getUltimaCarta(barajaMesa);
     carta.img.style.removeProperty('transform');
