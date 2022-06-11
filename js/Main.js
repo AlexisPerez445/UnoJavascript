@@ -149,8 +149,7 @@ function crearBaraja() {
     mostrarCartas(barajaJugador, cartasJugador);
     mostrarCartasMaquina(barajaMaquina, cartasMaquina);
     mostrarCartas(barajaMesa, zonaJuego);
-    mostrarCartaMaquina(cardFront,getUltimaCarta(barajaMazo));
-    mostrarCarta(cardBack,getUltimaCarta(barajaMazo))
+    mostrarCartaMazo();
 }
 
 //////SECCIÓN DEL JUGADOR 1*//////
@@ -407,6 +406,12 @@ function deleteCarta(baraja, id) {
         }
         contador++;
     });
+}
+
+// MOSTRAR CARTA DEL MAZO EN PANTALLA
+function mostrarCartaMazo(){
+    mostrarCartaMaquina(cardFront,getUltimaCarta(barajaMazo));
+    mostrarCarta(cardBack,getUltimaCarta(barajaMazo))
 }
 /*Elimina la última carta*/
 function deleteLastCarta(baraja) {
