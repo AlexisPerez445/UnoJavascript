@@ -217,6 +217,7 @@ function sumarCarta() {
         const cartasJ1 = document.querySelectorAll('#cartas-jugador img');
         const lastElement = cartasJ1[cartasJ1.length-1];
         getCardCoords(lastElement);
+       
         //mostrarCarta(cartasJugador, carta);
         addListenerCartas();
         sonidoRobar.play();
@@ -540,10 +541,7 @@ function animarCarta(elemento, x,y){
 function getCardCoords(elemento){
     const cartaMazo = document.querySelector('#mazo-central .cardFront img');
     const cartaMazo2 = document.querySelector('#mazo-central .cardBack img');
-    const divMazo1 = document.querySelector('#mazo-central .cardFront');
-    const divMazo2 = document.querySelector('#mazo-central .cardBack');
     let posicion = mazoCentral.getBoundingClientRect();
-
     let pos = elemento.getBoundingClientRect();
     let x = (pos.left - posicion.left) + 107;
     let y = (pos.top - posicion.top);
@@ -552,32 +550,22 @@ function getCardCoords(elemento){
 
 /* ANIMACION ROBAR CARTA */
 function animacionRobarCarta(elementoA, elementoB,x,y){
-    /*let tl = anime.timeline({
-        duration: 1500,
+    let tl = anime.timeline({
+        duration: 1000,
         easing: 'easeInOutBack'
-    })
+    });
     tl.add({
         targets: elementoA,
         translateX: x,
         translateY: y,
+        rotateY: 180
     })
     .add({
         targets: elementoB,
         translateX: x,
         translateY: y,
-    }),'-=1000'
-    .add({
-        targets: elementoA,
-        perspective: 600,
-        rotationY: 180
-    })
-    .add({
-        targets: elementoB,
-        perspective: 600,
-        rotationY: 360
-    });*/
-    elementoA.classList.add('effect');
-    elementoB.classList.add('effect');
+        rotateY: 360
+    }, '-=1000');
 }
 
 function j1Controls(){

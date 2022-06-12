@@ -390,6 +390,7 @@ section.final{
   transform: perspective(600px) rotateY(180deg);
   transition: .5s;
 }
+/*
 .card:hover .front img{
   transform: perspective(600px) rotateY(180deg);
   transition: .5s;
@@ -397,5 +398,6 @@ section.final{
 .card:hover .back img{
   transform: perspective(600px) rotateY(360deg);
   transition: .5s;
-}
+}*/
+
 
