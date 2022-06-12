@@ -41,10 +41,13 @@ let sonidoClick = new Audio();
 sonidoClick.src = "./sound/click.mp3";
 let sonidoAmbiente = new Audio();
 sonidoAmbiente.src = "./sound/soundtrack.mp3"
+sonidoAmbiente.loop = true;
 let sonidoCarta = new Audio();
 sonidoCarta.src = "./sound/card.mp3";
 let sonidoRobar = new Audio();
 sonidoRobar.src = "./sound/card_dealing.mp3"
+let sonidoPerder = new Audio();
+sonidoPerder.src= "./sound/game_over.mp3"
 
 /////*VARIABLES PARA LAS BARAJAS*/////
 let baraja = [];
@@ -213,12 +216,9 @@ let secondClick = false;
 function sumarCarta() {
     if (secondClick == false) {
         añadirCarta(barajaJugador);
-        carta = getUltimaCarta(barajaJugador);
         const cartasJ1 = document.querySelectorAll('#cartas-jugador img');
         const lastElement = cartasJ1[cartasJ1.length-1];
-        getCardCoords(lastElement);
-       
-        //mostrarCarta(cartasJugador, carta);
+        getCoordJ1(lastElement);
         addListenerCartas();
         sonidoRobar.play();
         secondClick = true;
@@ -269,24 +269,29 @@ function descartarCartaMaquina() {
             break;
         } else if ((i + 1) == listaCarta.length) {
             añadirCarta(barajaMaquina);
+            const cartasJ2 = document.querySelectorAll('#cartas-maquina img');
+            const lastElement = cartasJ2[cartasJ2.length-1];
+            getCoordJ2(lastElement); 
+            sonidoRobar.play();
             cartaMaquina = getUltimaCarta(barajaMaquina);
             comparacion = compararCartas(cartaMesa, cartaMaquina);
             cartaID = cartaMaquina.id;
-            if (comparacion) {
-                setCarta(barajaMesa, cartaMaquina);
-                deleteLastCarta(barajaMaquina);
-                eliminarCartaMesa();
-                mostrarCarta(zonaJuego, cartaMaquina);
-                setTurno('1');
-                setColorMesa();
-                sonidoCarta.play();
-                console.log("Jugador 2 ha robado y tirado una carta")
-                ganar();
-                gestionTurnos();
+            if (comparacion) {   
+                setTimeout(() =>{
+                    getCoords(cartaMaquina.img2);
+                    let cartaID = cartaMaquina.id;
+                    setCarta(barajaMesa, cartaMaquina);
+                    deleteCarta(barajaMaquina, cartaID);
+                    setTimeout(j2Controls,1050); 
+                    setColorMesa();
+                    setTurno('1');
+                    sonidoCarta.play();
+                    console.log("Jugador 2 ha robado y tirado una carta")
+                    ganar();
+                    gestionTurnos();
+                },2300);
                 break;
-            } else {             
-                mostrarCartaMaquina(cartasMaquina, cartaMaquina);
-                sonidoRobar.play();
+            } else {          
                 console.log("Jugador 2 ha robado una carta")
                 setTurno('1');
                 gestionTurnos();
@@ -496,6 +501,7 @@ function ganar(){
             <img src="./img/perder_2.gif" class="frameStyle" id="frameGanar">
         </div>`;
         contenedor.appendChild(div);
+        sonidoPerder.play();
         console.log("Gana el jugador 2");
     }
 }
@@ -537,8 +543,17 @@ function animarCarta(elemento, x,y){
     })
 }
 
-/*[ROBAR CARTA] OBTENER POSICION DE LA CARTA JUGADORES*/
-function getCardCoords(elemento){
+function getCoordJ2(elemento){
+    const cartaMazo = document.querySelector('#mazo-central .cardFront img');
+    let posicion = mazoCentral.getBoundingClientRect();
+    let pos = elemento.getBoundingClientRect();
+    let x = (pos.left - posicion.left) + 107;
+    let y = (pos.top - posicion.top);
+    animacionRobarCartaJ2(cartaMazo,x,y);
+}
+
+/*[ROBAR CARTA] OBTENER POSICION DE LA CARTA JUGADOR 1*/
+function getCoordJ1(elemento){
     const cartaMazo = document.querySelector('#mazo-central .cardFront img');
     const cartaMazo2 = document.querySelector('#mazo-central .cardBack img');
     let posicion = mazoCentral.getBoundingClientRect();
@@ -548,10 +563,10 @@ function getCardCoords(elemento){
     animacionRobarCarta(cartaMazo, cartaMazo2,x,y);
 }
 
-/* ANIMACION ROBAR CARTA */
+/* ANIMACION ROBAR CARTA JUGADOR 1 */
 function animacionRobarCarta(elementoA, elementoB,x,y){
     let tl = anime.timeline({
-        duration: 1000,
+        duration: 500,
         easing: 'easeInOutBack'
     });
     tl.add({
@@ -565,7 +580,31 @@ function animacionRobarCarta(elementoA, elementoB,x,y){
         translateX: x,
         translateY: y,
         rotateY: 360
-    }, '-=1000');
+    }, '-=500');
+    setTimeout(() => {
+        elementoB.style.removeProperty('transform');
+        mostrarCarta(cartasJugador,  getUltimaCarta(barajaJugador));
+        limpiarHTML(cardFront);
+        limpiarHTML(cardBack);
+        mostrarCartaMazo();
+        addListenerCartas();
+    }, 1000);
+}
+/* ANIMACION ROBAR CARTA JUGADOR 2 */
+function animacionRobarCartaJ2(elemento,x,y){
+    let animation = anime({
+        targets: elemento,
+        translateX: x,
+        translateY: y,
+        easing: 'easeInOutBack'
+    });
+    setTimeout(() => {
+        elemento.style.removeProperty('transform');
+        mostrarCartaMaquina(cartasMaquina,  getUltimaCarta(barajaMaquina));
+        limpiarHTML(cardFront);
+        limpiarHTML(cardBack);
+        mostrarCartaMazo();
+    }, 1500);
 }
 
 function j1Controls(){
