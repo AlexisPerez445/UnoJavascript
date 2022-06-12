@@ -197,6 +197,9 @@ section{
 section.final{
   margin-bottom: 35rem;
 }
+.vhidden{
+  visibility: hidden;
+}
 .inicio{
   background-color: var(--colorPrimario);
   height: 100%;
@@ -366,27 +369,33 @@ section.final{
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
+  transition: .5s;
 }
 .card .face {
   grid-area: 1/1;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  overflow: hidden;
+  /*overflow: hidden;*/
   transition: .5s;
 }
-.card .front {
+.card img{
+  backface-visibility: hidden;
+}
+.card .front img{
   transform: perspective(600px) rotateY(0deg);
+  transition: .5s;
 }
-
-.card .back {
+.card .back img{
   transform: perspective(600px) rotateY(180deg);
+  transition: .5s;
 }
-
-.card:hover .front {
+.card:hover .front img{
   transform: perspective(600px) rotateY(180deg);
+  transition: .5s;
 }
-
-.card:hover .back {
+.card:hover .back img{
   transform: perspective(600px) rotateY(360deg);
+  transition: .5s;
 }
+

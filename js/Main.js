@@ -20,7 +20,7 @@ const btnFinalizar = document.querySelector('#zona-btn button');
 const tituloJuego = document.querySelector('#zona-btn h1');
 const pJugador = document.querySelector('.zona-jugador p');
 const pMaquina = document.querySelector('.zona-maquina p');
-const cartaMazo = document.querySelector('#mazo-central img');
+const cartaMazo = document.querySelector('#mazo-central');
 const tablero = document.querySelector('#tablero');
 const contenedor =document.querySelector('.contenedor-2');
 const btnSubir = document.querySelector('#btn-subir');
@@ -217,7 +217,7 @@ function sumarCarta() {
         const cartasJ1 = document.querySelectorAll('#cartas-jugador img');
         const lastElement = cartasJ1[cartasJ1.length-1];
         getCardCoords(lastElement);
-        setTimeout(mostrarCarta(cartasJugador, carta),5000);
+        //mostrarCarta(cartasJugador, carta);
         addListenerCartas();
         sonidoRobar.play();
         secondClick = true;
@@ -237,7 +237,7 @@ function finalizarTurno() {
 
 /*EVENTOS QUE SE ACTIVAN CUANDO ES EL TURNO DEL JUGADOR 1*/
 function addEventListeners() {
-    //mazoCentral.addEventListener('click', sumarCarta);
+    mazoCentral.addEventListener('click', sumarCarta);
     btnFinalizar.addEventListener('click', finalizarTurno);
 }
 
@@ -520,34 +520,64 @@ function limpiarHTML(elemento){
 function getCoords(elemento){
     const cartaEnMesa = document.querySelector('#cartas-mesa');
     let posicion = cartaEnMesa.getBoundingClientRect();
-
     let pos = elemento.getBoundingClientRect();
     let x = posicion.left - pos.left;
     let y = posicion.top - pos.top;
     animarCarta(elemento,x,y);
 }
 
-// MUEVE LA CARTA A UNA POSICION ELEGIDA
+// [DESCARTAR CARTA] MUEVE LA CARTA DE LOS JUGADORES A UNA POSICION ELEGIDA
 function animarCarta(elemento, x,y){
-    gsap.to(elemento,{
-        duration: 1,
-        x: x,
-        y: y,
-        ease: 'expo.out'
-    });
+    let animation = anime({
+        targets: elemento,
+        translateX: x,
+        translateY: y,
+        easing: 'easeInOutBack'
+    })
 }
 
+/*[ROBAR CARTA] OBTENER POSICION DE LA CARTA JUGADORES*/
 function getCardCoords(elemento){
-    const cartaMazo = document.querySelector('#mazo-central img');
-    let posicion = cartaMazo.getBoundingClientRect();
+    const cartaMazo = document.querySelector('#mazo-central .cardFront img');
+    const cartaMazo2 = document.querySelector('#mazo-central .cardBack img');
+    const divMazo1 = document.querySelector('#mazo-central .cardFront');
+    const divMazo2 = document.querySelector('#mazo-central .cardBack');
+    let posicion = mazoCentral.getBoundingClientRect();
+
     let pos = elemento.getBoundingClientRect();
     let x = (pos.left - posicion.left) + 107;
     let y = (pos.top - posicion.top);
-    animarCarta(cartaMazo,x,y);
+    animacionRobarCarta(cartaMazo, cartaMazo2,x,y);
 }
 
-function girarCarta(){
-    let carta ="";
+/* ANIMACION ROBAR CARTA */
+function animacionRobarCarta(elementoA, elementoB,x,y){
+    /*let tl = anime.timeline({
+        duration: 1500,
+        easing: 'easeInOutBack'
+    })
+    tl.add({
+        targets: elementoA,
+        translateX: x,
+        translateY: y,
+    })
+    .add({
+        targets: elementoB,
+        translateX: x,
+        translateY: y,
+    }),'-=1000'
+    .add({
+        targets: elementoA,
+        perspective: 600,
+        rotationY: 180
+    })
+    .add({
+        targets: elementoB,
+        perspective: 600,
+        rotationY: 360
+    });*/
+    elementoA.classList.add('effect');
+    elementoB.classList.add('effect');
 }
 
 function j1Controls(){
