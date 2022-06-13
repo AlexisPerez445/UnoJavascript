@@ -30,6 +30,7 @@ const jugadorTXT = document.querySelector('.jugador-txt');
 const maquinaTXT = document.querySelector('.maquina-txt');
 const cardFront = document.querySelector('.cardFront');
 const cardBack = document.querySelector('.cardBack');
+const cardBackground = document.querySelector('#cardBackground img');
 
 /////*CONTROLADOR DE LOS TURNOS*/////
 let turnoJugadores =0;
@@ -76,6 +77,7 @@ function empezarJuego() {
         backArrow.classList.remove('ndisplay');
         btnBajar.addEventListener('click', volumenControl);
         backArrow.addEventListener('click', restartGame);
+        cardBackground.classList.remove('ndisplay');
     }
 }
 
@@ -640,5 +642,5 @@ function volumenControl(){
 
 // REINICIAR EL JUEGO
 function restartGame(){
-    console.log("hola");
+    location.reload();
 }
